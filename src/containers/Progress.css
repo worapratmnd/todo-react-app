@@ -1,0 +1,31 @@
+.progress-layout {
+  background-color: #e07c7c;
+  border-radius: 20px;
+  padding: 2vh 2vw;
+}
+
+.progress-title {
+  color: #ffffff;
+  font-size: xx-large;
+}
+
+.progress-complete-txt {
+  color: #ffffff;
+  font-size: medium;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #3b3b3b;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.progress {
+  width: 10%;
+  height: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  transition: width 0.5s ease-in-out;
+}

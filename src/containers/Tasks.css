@@ -1,0 +1,12 @@
+.container {
+  margin-top: 2vh;
+}
+
+.tasks {
+  display: flex;
+  justify-content: space-between;
+}
+
+.task-title {
+  font-size: xx-large;
+}
