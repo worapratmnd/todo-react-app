@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dropdown from "../components/Dropdown";
 import './Tasks.css';
 import { IOption } from "../interfaces/options";
+import Task from "../components/Task";
 
 const options: IOption[] = [
     { value: '1', label: 'All' },
@@ -18,9 +19,15 @@ const Tasks = () => {
 
     return (
         <div className="container">
-            <div className="tasks">
-                <span className="task-title">Tasks</span>
-                <Dropdown options={options} onChangeOption={setSelectedOption} />
+            <div>
+                <div className="tasks">
+                    <span className="task-title">Tasks</span>
+                    <Dropdown options={options} onChangeOption={setSelectedOption} />
+                </div>
+                <div>
+                    <Task />
+                    <Task />
+                </div>
             </div>
         </div>
     )
