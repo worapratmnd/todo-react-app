@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import './Task.css'
+import { ITodo } from "../interfaces/todo";
+import { useAppDispatch } from "../reducers/hooks";
+import { toggleTask } from "../reducers/todos";
 
 interface TaskProps {
-
+    task: ITodo
 }
 
-const Task: React.FC<TaskProps> = () => {
+const Task: React.FC<TaskProps> = ({ task }) => {
+    const dispatch = useAppDispatch();
     const [mode, setMode] = useState<string>('view');
 
     // useEffect(() => {})
@@ -22,14 +26,20 @@ const Task: React.FC<TaskProps> = () => {
         setMode('view');
     }
 
+    const onComplete = (event: React.ChangeEvent<HTMLInputElement>) => {
+        dispatch(toggleTask(task))
+    }
+
     return (
         <div className="task-box">
             {mode === "view" &&
                 (
                     <>
-                        <label className="checkbox-container">
-                            <span>Checkbox</span>
-                            <input type="checkbox" />
+                        <label className="checkbox-container" style={{
+                            textDecoration: task.completed ? 'line-through' : 'none'
+                        }}>
+                            <span>{task.title}</span>
+                            <input type="checkbox" checked={task.completed} onChange={onComplete} />
                             <span className="checkmark"></span>
                         </label>
                         <div className="dropdown">

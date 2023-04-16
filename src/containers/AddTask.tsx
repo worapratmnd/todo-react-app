@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import './AddTask.css';
+import { addTask } from "../reducers/todos";
+import { ITodo } from "../interfaces/todo";
+import { useAppDispatch } from "../reducers/hooks";
 
 const AddTask = () => {
+    const dispatch = useAppDispatch();
     const [inputValue, setInputValue] = useState<string>("");
     const [saveBtnVisible, setSaveBtnVisible] = useState<boolean>(false);
 
@@ -11,7 +15,14 @@ const AddTask = () => {
     };
 
     const handleSaveClick = () => {
-        alert(`You entered: ${inputValue}`);
+        let body: ITodo = {
+            id: "12345",
+            title: inputValue,
+            completed: false,
+        }
+        dispatch(addTask(body));
+        setInputValue("");
+        setSaveBtnVisible(false);
     };
 
     return (
