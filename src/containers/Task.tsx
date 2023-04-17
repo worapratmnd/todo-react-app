@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './Task.css'
 import { ITodo } from "../interfaces/todo";
 import { useAppDispatch } from "../reducers/hooks";
-import { deleteTask, toggleTask, updateTask } from "../reducers/todos";
+import { fetchCompleteTask, fetchEditTasks, fetchRemoveTask } from "../reducers/todos";
 
 interface TaskProps {
     task: ITodo
@@ -20,16 +20,16 @@ const Task: React.FC<TaskProps> = ({ task }) => {
     }
 
     const onDelete = () => {
-        dispatch(deleteTask(task))
+        dispatch(fetchRemoveTask(task))
     }
 
     const onUpdate = () => {
-        dispatch(updateTask({ ...task, title: title }))
+        dispatch(fetchEditTasks({ ...task, title: title }))
         setMode('view');
     }
 
     const onComplete = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(toggleTask(task))
+        dispatch(fetchCompleteTask(task));
     }
 
     return (

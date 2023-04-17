@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import './AddTask.css';
-import { addTask } from "../reducers/todos";
+import { fetchAddTasks } from "../reducers/todos";
 import { ITodo } from "../interfaces/todo";
 import { useAppDispatch } from "../reducers/hooks";
 
@@ -16,11 +16,10 @@ const AddTask = () => {
 
     const handleSaveClick = () => {
         let body: ITodo = {
-            id: inputValue,
             title: inputValue,
             completed: false,
         }
-        dispatch(addTask(body));
+        dispatch(fetchAddTasks(body));
         setInputValue("");
         setSaveBtnVisible(false);
     };

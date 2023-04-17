@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Dropdown from "../components/Dropdown";
 import './Tasks.css';
 import { IOption } from "../interfaces/options";
-import Task from "../components/Task";
+import Task from "./Task";
 import { useAppDispatch, useAppSelector } from "../reducers/hooks";
 import { fetchTasks, getTask } from "../reducers/todos";
 import { ITodo } from "../interfaces/todo";
