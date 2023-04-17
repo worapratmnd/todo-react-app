@@ -3,8 +3,8 @@ import Dropdown from "../components/Dropdown";
 import './Tasks.css';
 import { IOption } from "../interfaces/options";
 import Task from "../components/Task";
-import { useAppSelector } from "../reducers/hooks";
-import { getTask } from "../reducers/todos";
+import { useAppDispatch, useAppSelector } from "../reducers/hooks";
+import { fetchTasks, getTask } from "../reducers/todos";
 import { ITodo } from "../interfaces/todo";
 
 const options: IOption[] = [
@@ -14,8 +14,16 @@ const options: IOption[] = [
 ];
 
 const Tasks = () => {
+    const dispatch = useAppDispatch();
     const taskList = useAppSelector(getTask);
     const [selectedOption, setSelectedOption] = useState<IOption>(options[0]);
+
+
+    useEffect(() => {
+        dispatch(fetchTasks())
+    }, []);
+
+
 
     const filterTask = (task: ITodo) => {
         if (selectedOption.value === '1') {

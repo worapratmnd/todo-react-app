@@ -1,8 +1,13 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { ITodo } from "../interfaces/todo";
 import { RootState } from ".";
 
 const initialState: ITodo[] = [];
+
+export const fetchTasks = createAsyncThunk("task/tetchTask", async () => {
+  let res = await fetch(`http://localhost:3001/todos`);
+  return res.json();
+});
 
 export const todoSlice = createSlice({
   name: "task",
@@ -37,6 +42,12 @@ export const todoSlice = createSlice({
       state = state.filter((task) => task.id !== action.payload.id);
       return state;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTasks.fulfilled, (state, action) => {
+      state = action.payload;
+      return state;
+    });
   },
 });
 
