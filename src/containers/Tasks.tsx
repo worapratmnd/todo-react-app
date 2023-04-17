@@ -5,6 +5,7 @@ import { IOption } from "../interfaces/options";
 import Task from "../components/Task";
 import { useAppSelector } from "../reducers/hooks";
 import { getTask } from "../reducers/todos";
+import { ITodo } from "../interfaces/todo";
 
 const options: IOption[] = [
     { value: '1', label: 'All' },
@@ -15,9 +16,16 @@ const options: IOption[] = [
 const Tasks = () => {
     const taskList = useAppSelector(getTask);
     const [selectedOption, setSelectedOption] = useState<IOption>(options[0]);
-    useEffect(() => {
-        console.log(taskList)
-    }, [taskList])
+
+    const filterTask = (task: ITodo) => {
+        if (selectedOption.value === '1') {
+            return task;
+        } else if (selectedOption.value === '2' && task.completed) {
+            return task;
+        } else if (selectedOption.value === '3' && !task.completed) {
+            return task;
+        }
+    }
 
     return (
         <div className="container">
@@ -27,7 +35,7 @@ const Tasks = () => {
                     <Dropdown options={options} onChangeOption={setSelectedOption} />
                 </div>
                 {
-                    taskList.map(task => (
+                    taskList.filter(filterTask).map(task => (
                         <Task key={task.id} task={task} />
                     ))
                 }
