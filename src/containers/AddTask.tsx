@@ -16,7 +16,7 @@ const AddTask = () => {
 
     const handleSaveClick = () => {
         let body: ITodo = {
-            id: "12345",
+            id: inputValue,
             title: inputValue,
             completed: false,
         }
@@ -24,6 +24,12 @@ const AddTask = () => {
         setInputValue("");
         setSaveBtnVisible(false);
     };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter' && inputValue !== '') {
+            handleSaveClick();
+        }
+    }
 
     return (
         <div className="add-task-layout">
@@ -34,6 +40,7 @@ const AddTask = () => {
                     placeholder="Enter your text here"
                     value={inputValue}
                     onChange={handleInputChange}
+                    onKeyDown={handleKeyDown}
                 />
                 {saveBtnVisible && (
                     <button type="button" className="btn-save save-btn" onClick={handleSaveClick}>
